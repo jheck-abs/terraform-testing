@@ -4,7 +4,7 @@ import { DockerProvider } from "@cdktf/provider-docker/lib/provider";
 import { Image } from "@cdktf/provider-docker/lib/image";
 import { Container } from "@cdktf/provider-docker/lib/container";
 
-export class MyStack extends TerraformStack {
+export class mainStack extends TerraformStack {
   constructor(scope: Construct, name: string) {
     super(scope, name);
 
@@ -29,5 +29,5 @@ export class MyStack extends TerraformStack {
 }
 
 const app = new App();
-new MyStack(app, "learn-cdktf-docker");
+new mainStack(app, "learn-cdktf-docker");
 app.synth();

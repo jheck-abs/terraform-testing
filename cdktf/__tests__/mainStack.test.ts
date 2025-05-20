@@ -1,13 +1,11 @@
-// Copyright (c) HashiCorp, Inc
-// SPDX-License-Identifier: MPL-2.0
-import "cdktf/lib/testing/adapters/jest"; // Load types for expect matchers
+import "cdktf/lib/testing/adapters/jest";
 import { Testing } from "cdktf";
-import { MyStack } from "../main";
+import { mainStack } from "../srv/mainStack";
 import { Container } from "../.gen/providers/docker/container";
 
 function fullSynthesizeStack() {
   const app = Testing.app();
-  const stack = new MyStack(app, "myStack");
+  const stack = new mainStack(app, "mainStack");
 
   const fullSynth = Testing.fullSynth(stack);
 
@@ -16,7 +14,7 @@ function fullSynthesizeStack() {
 
 function synthesizeStack() {
   const app = Testing.app();
-  const stack = new MyStack(app, "myStack");
+  const stack = new mainStack(app, "mainStack");
 
   return Testing.synth(stack);
 }

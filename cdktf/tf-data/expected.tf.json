@@ -1,0 +1,73 @@
+{
+  "//": {
+    "metadata": {
+      "backend": "local",
+      "stackName": "simpleStack",
+      "version": "0.20.12"
+    },
+    "outputs": {}
+  },
+  "data": {
+    "btp_subaccount_environment_instance": {
+      "subaccount-environment-instance": {
+        "//": {
+          "metadata": {
+            "path": "simpleStack/subaccount-environment-instance",
+            "uniqueId": "subaccount-environment-instance"
+          }
+        },
+        "depends_on": [
+          "data.btp_subaccount_environment_instances.data-subaccount-environment-instances"
+        ],
+        "id": "${element([ for key, val in { for key, val in data.btp_subaccount_environment_instances.data-subaccount-environment-instances.values: val.id => val }: val.id if val.environment_type == \"cloudfoundry\"], 0)}",
+        "subaccount_id": "appsSubaccount.id"
+      }
+    },
+    "btp_subaccount_environment_instances": {
+      "data-subaccount-environment-instances": {
+        "//": {
+          "metadata": {
+            "path": "simpleStack/data-subaccount-environment-instances",
+            "uniqueId": "data-subaccount-environment-instances"
+          }
+        },
+        "subaccount_id": "appsSubaccount.id"
+      }
+    }
+  },
+  "provider": {
+    "btp": [
+      {
+        "globalaccount": "globalAccountSubdomain",
+        "idp": "btpDeploymentUserIdP",
+        "password": "btpDeploymentUserSecret",
+        "username": "btpDeploymentUser"
+      }
+    ],
+    "cloudfoundry": [
+      {
+        "api_url": "${jsondecode(data.btp_subaccount_environment_instance.subaccount-environment-instance.labels)[\"API Endpoint\"]}",
+        "origin": "btpDeploymentUserOrigin",
+        "password": "btpDeploymentUserSecret",
+        "user": "btpDeploymentUser"
+      }
+    ]
+  },
+  "terraform": {
+    "backend": {
+      "local": {
+        "path": "C:\\Users\\JonasHeck\\public\\terraform-testing\\cdktf\\terraform.simpleStack.tfstate"
+      }
+    },
+    "required_providers": {
+      "btp": {
+        "source": "SAP/btp",
+        "version": "1.12.0"
+      },
+      "cloudfoundry": {
+        "source": "cloudfoundry/cloudfoundry",
+        "version": "1.5.0"
+      }
+    }
+  }
+}
