@@ -1,0 +1,15 @@
+{
+  "language": "typescript",
+  "app": "npx ts-node main.ts",
+  "projectId": "2b46c520-c719-4ea7-9a48-bc89e7d4c255",
+  "sendCrashReports": "false",
+  "terraformProviders": [
+    "kreuzwerker/docker",
+    "SAP/btp",
+    "cloudfoundry/cloudfoundry",
+    "ArthurHlt/zipper@~> 0.14",
+    "salrashid123/http-full@~> 1.3"
+  ],
+  "terraformModules": [],
+  "context": {}
+}
